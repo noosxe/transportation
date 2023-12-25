@@ -6,7 +6,7 @@ use components::{locomotive::Locomotive, track::Track};
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_plugin(NodePlugin)
+        .add_plugins(NodePlugin)
         .run();
 }
 
@@ -14,9 +14,9 @@ pub struct NodePlugin;
 
 impl Plugin for NodePlugin {
     fn build(&self, app: &mut App) {
-        app.add_startup_system(boot)
-            .add_startup_system(add_tracks)
-            .add_system(advance_logomotive);
+        app.add_systems(Startup, boot)
+            .add_systems(Startup, add_tracks)
+            .add_systems(Update, advance_logomotive);
     }
 }
 
